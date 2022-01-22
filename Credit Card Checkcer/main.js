@@ -89,3 +89,4 @@ const idInvalidCompanies = (collection) => {
 };
 console.log(findInvalidCards(batch));
 console.log(idInvalidCompanies(batch));
+//Smart
