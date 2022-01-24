@@ -12,8 +12,8 @@ const mockUpStrand = () => {
   }
   return newStrand;
 };
-// pAqeuor Factory function
-const pAqeuorFactory = (num, strand) => {
+// pAequor Factory function
+const pAequorFactory = (num, strand) => {
   return {
     specimenNum: num,
     dna: strand,
@@ -23,24 +23,24 @@ const pAqeuorFactory = (num, strand) => {
       let base = ["A", "T", "C", "G"].filter((x) => x !== target);
       this.dna.splice(randBase, 1, base[Math.floor(Math.random() * 3)]);
     },
-    compareDna(pAqeuor) {
+    compareDna(pAequor) {
       let resemblance = 1;
-      console.log(pAqeuor.dna);
-      console.log(this.dna);
       for (let i = 0; i < 15; i++) {
-        if (pAqeuor.dna[i] === this.dna[i]) {
+        if (pAequor.dna[i] === this.dna[i]) {
           resemblance++;
         }
       }
       let resemblencePercent = (resemblance * 100) / 15;
       console.log(
-        `specimen #${pAqeuor.specimenNum} and specimen #${
+        `specimen #${pAequor.specimenNum} and specimen #${
           this.specimenNum
         } have ${Math.floor(resemblencePercent)}% DNA in common.`
       );
     },
+    //BLUNDER!!!!!!!
     willLikelySurvive() {
       let occurence = 0;
+      //check below for built in iterator array FILTER you dumb
       for (const CorG of this.dna) {
         if (CorG === "C" || CorG === "G") {
           occurence++;
@@ -54,31 +54,27 @@ const pAqeuorFactory = (num, strand) => {
         return false;
       }
     },
+    // //smarter Way of willLikelySurvive
+    // willLikelySurvive() {
+    //   const cAndG = this.dna.filter(
+    //     (letter) => letter === "C" || letter === "G"
+    //   );
+    //   if (cAndG.length / this.dna.length > 0.6) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // },
   };
 };
 
-// const chla = pAqeuorFactory(1, mockUpStrand());
-// const law = pAqeuorFactory(2, mockUpStrand());
-// chla.mutate();
-// law.compareDna(chla);
-// console.log(chla.dna);
-// chla.willLikelySurvive();
-// console.log(chla.willLikelySurvive());
 let arrayOfSpecimens = [];
-
-const creatingSurvivingSpecimen = (array) => {
-  for (let i = 0; i < 100; i++) {
-    let specimen = pAqeuorFactory(i, mockUpStrand());
-    if (specimen.willLikelySurvive() === true) {
-      return array.push(specimen);
-    }
-  }
-};
 let i = 1;
 while (arrayOfSpecimens.length < 30) {
-  creatingSurvivingSpecimen(arrayOfSpecimens);
-  // arrayOfSpecimens[i].specimenNum += i * 100;
-  i++;
+  let temp = pAequorFactory(i, mockUpStrand());
+  if (temp.willLikelySurvive() == true) {
+    arrayOfSpecimens.push(temp);
+    i += 1;
+  }
 }
-
 console.log(arrayOfSpecimens);
